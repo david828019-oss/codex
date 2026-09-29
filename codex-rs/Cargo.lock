@@ -2531,6 +2531,7 @@ dependencies = [
  "codex-memories-write",
  "codex-model-provider",
  "codex-models-manager",
+ "codex-native-relay",
  "codex-plugin",
  "codex-protocol",
  "codex-responses-api-proxy",
@@ -4075,6 +4076,37 @@ dependencies = [
  "tracelogging",
  "windows-sys 0.61.2",
  "wxc_common",
+]
+
+[[package]]
+name = "codex-native-relay"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "axum",
+ "bytes",
+ "clap",
+ "codex-api",
+ "codex-http-client",
+ "codex-login",
+ "codex-model-provider",
+ "codex-model-provider-info",
+ "codex-models-manager",
+ "codex-protocol",
+ "codex-websocket-client",
+ "constant_time_eq",
+ "futures",
+ "http 1.4.0",
+ "pretty_assertions",
+ "rand 0.9.3",
+ "reqwest 0.12.28",
+ "serde_json",
+ "sha2 0.10.9",
+ "tokio",
+ "tokio-tungstenite",
+ "tracing",
+ "tungstenite",
+ "wiremock",
 ]
 
 [[package]]

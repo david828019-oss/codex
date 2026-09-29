@@ -1,0 +1,42 @@
+[package]
+name = "codex-native-relay"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "codex_native_relay"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+axum = { workspace = true, features = ["http1", "tokio", "ws"] }
+bytes = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+codex-api = { workspace = true }
+codex-http-client = { workspace = true }
+codex-login = { workspace = true }
+codex-model-provider = { workspace = true }
+codex-model-provider-info = { workspace = true }
+codex-models-manager = { workspace = true }
+codex-protocol = { workspace = true }
+codex-websocket-client = { workspace = true }
+constant_time_eq = { workspace = true }
+futures = { workspace = true }
+http = { workspace = true }
+rand = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+tokio = { workspace = true, features = ["macros", "net", "rt-multi-thread", "signal"] }
+tokio-tungstenite = { workspace = true }
+tracing = { workspace = true }
+tungstenite = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+reqwest = { workspace = true, features = ["stream"] }
+wiremock = { workspace = true }
