@@ -1,4 +1,4 @@
-//! `codex relay`: serve Responses API requests through this installation's native model client.
+//! `codex relay`: serve Codex backend requests through this installation's native model client.
 
 use codex_core::config::Config;
 use codex_login::AuthManager;
@@ -28,6 +28,7 @@ pub(crate) async fn run_relay(
         AuthManager::shared_from_config(&config, /*enable_codex_api_key_env*/ true).await?;
     let upstream = RelayUpstream {
         provider_info: config.model_provider.clone(),
+        chatgpt_base_url: config.chatgpt_base_url.clone(),
         auth_manager,
         http_client_factory: config.http_client_factory(),
     };

@@ -4091,7 +4091,9 @@ dependencies = [
  "codex-login",
  "codex-model-provider",
  "codex-model-provider-info",
+ "codex-models-manager",
  "codex-protocol",
+ "codex-websocket-client",
  "constant_time_eq",
  "futures",
  "http 1.4.0",
@@ -4101,7 +4103,9 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "tokio",
+ "tokio-tungstenite",
  "tracing",
+ "tungstenite",
  "wiremock",
 ]
 

@@ -1,13 +1,17 @@
-//! Local HTTP relay that sends Responses API requests through Codex's native model path.
+//! Local HTTP relay that sends Codex backend requests through Codex's native model path.
 //!
-//! The relay lets another gateway (for example a sub2api transport plugin) hand a raw Responses
-//! request to a running Codex installation. Codex then sends it upstream with its own provider
-//! configuration, HTTP client, `originator` / `User-Agent` / `version` headers, and — in the
-//! default `codex` auth mode — the ChatGPT login managed by [`AuthManager`], including token
-//! refresh. The upstream SSE stream is returned to the caller byte for byte.
+//! The relay lets another gateway (for example a sub2api transport plugin) hand a raw Responses,
+//! models, images, or files request, or a Responses WebSocket, to a running Codex installation.
+//! Codex then sends it upstream with its own provider configuration, HTTP client, `originator` /
+//! `User-Agent` / `version` headers, and — in the default `codex` auth mode — the ChatGPT login
+//! managed by [`AuthManager`], including token refresh. Upstream responses, including SSE streams and WebSocket frames, are returned to the
+//! caller unchanged.
 
 mod forward;
+mod multipart;
+mod routes;
 mod server;
+mod websocket;
 
 use std::net::SocketAddr;
 use std::sync::Arc;
@@ -73,6 +77,8 @@ impl RelayAuthMode {
 /// The native Codex pieces the relay reuses for every upstream request.
 pub struct RelayUpstream {
     pub provider_info: ModelProviderInfo,
+    /// ChatGPT backend base URL (`chatgpt_base_url` in config), used for the files API.
+    pub chatgpt_base_url: String,
     pub auth_manager: Arc<AuthManager>,
     pub http_client_factory: HttpClientFactory,
 }

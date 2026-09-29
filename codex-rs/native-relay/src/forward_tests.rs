@@ -3,29 +3,6 @@ use http::HeaderValue;
 use pretty_assertions::assert_eq;
 
 #[test]
-fn upstream_path_accepts_platform_backend_and_bare_shapes() {
-    let cases = [
-        ("/v1/responses", Some("/responses")),
-        ("/backend-api/codex/responses", Some("/responses")),
-        ("/responses", Some("/responses")),
-        ("/responses/", Some("/responses")),
-        ("/v1/responses/compact", Some("/responses/compact")),
-        (
-            "/backend-api/codex/responses/compact",
-            Some("/responses/compact"),
-        ),
-        ("/v1/chat/completions", None),
-        ("/backend-api/codex/models", None),
-        ("/v1/v1/responses", None),
-    ];
-    let actual: Vec<_> = cases
-        .iter()
-        .map(|(path, _)| (*path, upstream_path(path)))
-        .collect();
-    assert_eq!(actual, cases.to_vec());
-}
-
-#[test]
 fn merge_caller_headers_keeps_native_identity_and_drops_credentials() {
     let mut native = HeaderMap::new();
     native.insert("version", HeaderValue::from_static("native-version"));
